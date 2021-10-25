@@ -1,16 +1,13 @@
 <?php 
     class Auth extends DB {
-        protected function getUser($login, $password) {
+        protected function userExist($login, $password) {
             $stmt = $this->connect()->prepare('SELECT * FROM users WHERE login = ? and password = ?;');
             $stmt->execute(array($login, $password));
             $returned_row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $result;
+            $result = false;
             if($stmt->rowCount() > 0) {
                 $_SESSION['user_id'] = $returned_row['id'];
                 $result = true;
-            }
-            else {
-                $result = false;
             }
             return $result;
         }

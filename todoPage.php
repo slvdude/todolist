@@ -1,3 +1,11 @@
+<?php 
+    include 'classes/DB.php';
+    include 'classes/Todo.php';
+
+    if(isset($_POST['submit'])) {
+        
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +20,7 @@
     <div class="container">
         <h1>Task list</h1>
         <hr>
-        <form action="" method="POST" class="create_task">
+        <form action="todoPage.php" method="POST" class="create_task">
             <input type="text" placeholder="Enter a task" name="title" class="input_task">
             <button type="submit" class="add_task" name="submit">Add task</button>
         </form>

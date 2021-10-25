@@ -10,19 +10,18 @@
         }
 
         public function authUser() {
-            $userExist = false;
-            if($this->getUser($this->login, $this->password) == true) {
-                return $userExist = true;
+            $userExist = $this->userExist($this->login, $this->password);
+            if($userExist == true) {
+                return $userExist;
             }
             else {
                 $this->signupUser();
-                return $userExist;
             }
         }
 
         private function signupUser() {
             
-            if($this->inputEmty() == false) {
+            if($this->inputEmpty() == false) {
                 $this->setUser($this->login, $this->password);
                 $this->authUser();
             }
@@ -31,7 +30,7 @@
             }
         }
         
-        private function inputEmty() {
+        private function inputEmpty() {
             $isEmpty;
             if(empty($this->login) || empty($this->password)) {
                 $isEmpty = true;
@@ -39,6 +38,6 @@
             else {
                 $isEmpty = false;
             }
-            return false;
+            return $isEmpty;
         }
     }
