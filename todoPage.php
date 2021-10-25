@@ -3,7 +3,10 @@
     include 'classes/Todo.php';
 
     if(isset($_POST['submit'])) {
-        
+        session_start();
+        $title = $_POST['title'];
+        $userId = $_SESSION['user_id'];
+        $todo = new Todo($title, $userId);
     }
 ?>
 <!DOCTYPE html>

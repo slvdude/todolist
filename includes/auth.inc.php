@@ -1,7 +1,6 @@
 <?php
-
+    session_start();
     if(isset($_POST['submit'])) {
-        session_start();
         $login = $_POST['login'];
         $password = $_POST['password'];
 
