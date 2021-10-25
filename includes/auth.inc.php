@@ -12,10 +12,6 @@
         $auth = new AuthController($login, $password);
         $user = $auth->authUser($login, $password);
 
-        if($user == true) {
-            header("Location: ../todoPage.php?signin=successful");
-        }
-        else {
-            header("Location: ../todoPage.php?signup=successful");
-        }
+        header("Location: ../todoPage.php?signin=successful");
+ 
     }
