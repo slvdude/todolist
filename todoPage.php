@@ -1,14 +1,12 @@
 <?php 
-    include 'classes/DB.php';
-    include 'classes/Todo.php';
-
-    if(isset($_POST['submit'])) {
-        session_start();
-        $title = $_POST['title'];
-        $userId = $_SESSION['user_id'];
-        $todo = new Todo($title, $userId);
-    }
+    session_start();
+    $user = $_SESSION['user_id'];
+    include './classes/DB.php';
+    include './classes/Todo.php';
+    $todos = new Todo($user);
+    print_r($todos);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +23,7 @@
         <hr>
         <form action="todoPage.php" method="POST" class="create_task">
             <input type="text" placeholder="Enter a task" name="title" class="input_task">
-            <button type="submit" class="add_task" name="submit">Add task</button>
+            <button type="submit" class="add_task" name="addTodo">Add task</button>
         </form>
         <div class="handle_all">
             <form action="" method="POST">
