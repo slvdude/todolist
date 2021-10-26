@@ -21,7 +21,7 @@
     <div class="container">
         <h1>Task list</h1>
         <hr>
-        <form action="todoPage.php" method="POST" class="create_task">
+        <form action="addTodo.php" method="POST" class="create_task">
             <input type="text" placeholder="Enter a task" name="title" class="input_task">
             <button type="submit" class="add_task" name="addTodo">Add task</button>
         </form>

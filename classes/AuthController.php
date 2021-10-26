@@ -9,6 +9,15 @@
             $this->password = $password;
         }
 
+        public function signupUser() {
+            $isRegd = false;
+            if($this->inputEmpty() == false) {
+                $this->setUser($this->login, $this->password);
+                $isRegd = true;
+            }
+            return $isRegd;
+        }
+
         public function authUser() {
             $userExist = $this->userExist($this->login, $this->password);
             if($userExist == true) {
@@ -16,17 +25,6 @@
             }
             else {
                 $this->signupUser();
-            }
-        }
-
-        private function signupUser() {
-            
-            if($this->inputEmpty() == false) {
-                $this->setUser($this->login, $this->password);
-                $this->authUser();
-            }
-            else {
-                header("Location: ../index.php?error=inputempty");
             }
         }
         

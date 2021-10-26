@@ -15,7 +15,7 @@
         public function getTodos($userId) {
             $stmt = $this->connect()->prepare('SELECT * FROM tasks WHERE `user_id` = ?;');
             $stmt->execute(array($userId));
-            return $stmt->fetch();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
         }
 
         public function deleteTodo($id) {

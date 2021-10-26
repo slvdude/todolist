@@ -13,7 +13,7 @@
         }
 
         protected function setUser($login, $password) {
-            $stmt = $this->connect()->prepare('INSERT INTO users (login, password) VALUES (?, ?);');
+            $stmt = $this->connect()->prepare('INSERT INTO users (`login`, `password`) VALUES (?, ?);');
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             $stmt->execute(array($login, $hashed_password));
         }

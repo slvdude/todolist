@@ -13,7 +13,7 @@
         <h1>Welcome to TODOLIST</h1>
         <div class="form-container">
             <form action="includes/auth.inc.php" method="post" class="login-form">
-                <h2>Login/auth</h2>
+                <h2>Reg/auth</h2>
                 <input type="text" name="login" placeholder="Login" class="login-input"><br>
                 <input type="password" name="password" placeholder="Password" class="login-input"><br>
                 <button type="submit" name="submit" class="login-btn">Sign in</button><br>
