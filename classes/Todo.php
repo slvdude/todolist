@@ -8,23 +8,24 @@
         }
 
         public function createTodo($userId, $title) {
-           $stmt = $this->connect()->prepare('INSERT INTO tasks (`user_id`, `description`, `status`) VALUES (?, ?, ?);');
+           $stmt = $this->connect()->prepare('INSERT INTO `tasks` (`user_id`, `description`, `status`) VALUES (?, ?, ?);');
            $stmt->execute(array($userId, $title , false));
         }
 
         public function getTodos($userId) {
-            $stmt = $this->connect()->prepare('SELECT * FROM tasks WHERE `user_id` = ?;');
+            $stmt = $this->connect()->prepare('SELECT * FROM `tasks` WHERE `user_id` = ?;');
             $stmt->execute(array($userId));
-            return $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
         }
 
         public function deleteTodo($id) {
-            $stmt = $this->connect()->prepare('DELETE FROM tasks WHERE id = ?;');
+            $stmt = $this->connect()->prepare('DELETE FROM `tasks` WHERE id = ?;');
             $stmt->execute(array($id));
         }
 
         public function deleteAll() {
-            $stmt = $this->connect()->prepare('DELETE FROM tasks;');
+            $stmt = $this->connect()->prepare('DELETE FROM `tasks`;');
             $stmt->execute();
         }
 
@@ -42,7 +43,7 @@
             }
         }
 
-        public function doneAllTodos() {
+        public function doneAll() {
             $stmt = $this->connect()->prepare('UPDATE tasks SET status = 1;');
             $stmt->execute();
         }
