@@ -10,30 +10,22 @@
         }
 
         public function signupUser() {
-            $isRegd = false;
-            if($this->inputEmpty() == false) {
-                $this->setUser($this->login, $this->password);
-                $isRegd = true;
+            if($this->inputEmpty() == true) {
+                $userSet = $this->setUser($this->login, $this->password);
+                return $userSet;
             }
-            return $isRegd;
+            else {
+                header("Location: ../index.php?error=inputempty");
+            }
         }
 
         public function authUser() {
-            $userExist = $this->userExist($this->login, $this->password);
-            if($userExist == true) {
-                return $userExist;
-            }
-            else {
-                $this->signupUser();
-            }
+            return $this->userExist($this->login, $this->password);
         }
         
         private function inputEmpty() {
-            $isEmpty;
+            $isEmpty = true;
             if(empty($this->login) || empty($this->password)) {
-                $isEmpty = true;
-            }
-            else {
                 $isEmpty = false;
             }
             return $isEmpty;

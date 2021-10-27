@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if(isset($_POST['submit'])) {
         $login = $_POST['login'];
         $password = $_POST['password'];
@@ -8,10 +9,14 @@
         include '../classes/AuthController.php';
 
         $auth = new AuthController($login, $password);
-        $user = $auth->authUser($login, $password);
-        if($user == true) {
-            header("Location: ../todoPage.php?signin=successful"); 
-        } else {
-            header("Location: ../index.php?error=inputempty");
+        if($auth->authUser() == true) {
+            header("Location: ../todoPage.php?success"); 
+        } 
+        else if ($auth->signupUser() == true) {
+            $auth->authUser();
+            header("Location: ../todoPage.php?success"); 
+        } 
+        else {
+            header("Location: ../index.php?error=usernametaken");
         }
     }

@@ -12,9 +12,23 @@
             return $result;
         }
 
+        protected function checkLogin($login) {
+            $stmt = $this->connect()->prepare('SELECT `login` FROM users WHERE login = ?;');
+            $stmt->execute(array($login));
+            $result = true;
+            if($stmt->rowCount() > 0) {
+                $result = false;
+            }
+            return $result;
+        }
+
         protected function setUser($login, $password) {
-            $stmt = $this->connect()->prepare('INSERT INTO users (`login`, `password`) VALUES (?, ?);');
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt->execute(array($login, $hashed_password));
+            $isUserSet = false;
+            if($this->checkLogin($login) == true) {
+                $stmt = $this->connect()->prepare('INSERT INTO users (`login`, `password`) VALUES (?, ?);');
+                $stmt->execute(array($login, $password));
+                $isUserSet = true;
+            }
+            return $isUserSet;
         }
     }

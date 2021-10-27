@@ -4,6 +4,12 @@
     include './classes/DB.php';
     include './classes/Todo.php';
     $todos = new Todo($user);
+    $todoArr = $todos->getTodosByUserId($user);
+
+    if(isset($_POST['logout'])) {
+        header("Location: ./index.php");
+        unset($_SESSION['user_id']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +23,9 @@
     <link rel="stylesheet" href="css/todo.min.css">
 </head>
 <body>
+    <form action="todoPage.php" class="logout" method="post">
+        <button type="submit" name="logout">Logout</button>
+    </form>
     <div class="container">
         <h1>Task list</h1>
         <hr>
@@ -33,6 +42,32 @@
             </form> 
         </div>
         <hr>
+        <?php if(!empty($todoArr)): ?>     
+                <ul>
+                    <?php foreach($todoArr as $todo): ?>
+                        <li>
+                            <div class='todo_container'>
+                                <div>
+                                    <p class='todo_title'><?php echo $todo['description'] ?></p>
+                                    <div class="btn_container">
+                                        <form action="handleTodos.php" method="POST">
+                                            <input class='done_todo' type="hidden" name="done_todo" value="<?php echo $todo['id']?>"><?php echo $todo['id']?></input>
+                                            <button class='done_todo' name="doneTodo" type="submit">Ready</button>
+                                        </form>
+                                        <form action="handleTodos.php" method="POST">
+                                            <input type="hidden" name="todo_title" value="<?php echo $todo['id']?>">
+                                            <button class='delete_todo' name="deleteTodo" type="submit">Delete</button>
+                                        </form> 
+                                    </div>
+                                </div>
+                                <div class='round<?php echo $todo['status']? ' done': ''?>'></div>
+                            </div>
+                        </li>
+                        <hr>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: echo '<p style="color: red; font-size: 20px;">No tasks yet</p>'?>
+            <?php endif; ?>
     </div>
 </body>
 </html>
