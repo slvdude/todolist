@@ -29,15 +29,15 @@
     <div class="container">
         <h1>Task list</h1>
         <hr>
-        <form action="handleTodos.php" method="POST" class="create_task">
+        <form action="includes/todo.inc.php" method="POST" class="create_task">
             <input type="text" placeholder="Enter a task" name="title" class="input_task">
             <button type="submit" class="add_task" name="addTodo">Add task</button>
         </form>
         <div class="handle_all">
-            <form action="handleTodos.php" method="POST">
+            <form action="includes/todo.inc.php" method="POST">
                 <button class="handle_task" type="submit" name="deleteAll">Remove all</button>   
             </form>
-            <form action="handleTodos.php" method="POST">
+            <form action="includes/todo.inc.php" method="POST">
                 <button class="handle_task" type="submit" name="doneAll">Ready all</button>
             </form> 
         </div>
@@ -50,11 +50,11 @@
                                 <div>
                                     <p class='todo_title'><?php echo $todo['description'] ?></p>
                                     <div class="btn_container">
-                                        <form action="handleTodos.php" method="POST">
+                                        <form action="includes/todo.inc.php" method="POST">
                                             <input class='done_todo' type="hidden" name="done_todo" value="<?php echo $todo['id']?>"><?php echo $todo['id']?></input>
                                             <button class='done_todo' name="doneTodo" type="submit">Ready</button>
                                         </form>
-                                        <form action="handleTodos.php" method="POST">
+                                        <form action="includes/todo.inc.php" method="POST">
                                             <input type="hidden" name="todo_title" value="<?php echo $todo['id']?>">
                                             <button class='delete_todo' name="deleteTodo" type="submit">Delete</button>
                                         </form> 
