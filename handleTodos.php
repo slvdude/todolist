@@ -2,10 +2,10 @@
     session_start();
     include './classes/DB.php';
     include './classes/Todo.php';
+    $user = $_SESSION['user_id'];
     $todo = new Todo($user);
     if(isset($_POST['addTodo'])) {
         $title = $_POST['title'];
-        $user = $_SESSION['user_id'];
         $todo->createTodo($user, $title);
         header('Location: ./todoPage.php');
     }
